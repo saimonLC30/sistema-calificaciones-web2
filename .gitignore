@@ -1,0 +1,13 @@
+# Dependencias (se instalan con npm install)
+node_modules/
+
+# Variables de entorno (tienen secretos)
+.env
+
+# Archivos generados
+dist/
+coverage/
+
+# Archivos de trabajo de Postman y del sistema
+.postman/
+.DS_Store
