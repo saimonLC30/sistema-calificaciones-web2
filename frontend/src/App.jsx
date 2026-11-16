@@ -8,6 +8,13 @@ import Inicio from './pages/Inicio'
 import NoEncontrada from './pages/NoEncontrada'
 import MisCalificaciones from './pages/alumno/MisCalificaciones'
 import DetalleCalificacion from './pages/alumno/DetalleCalificacion'
+import MisMaterias from './pages/docente/MisMaterias'
+import DetalleMateria from './pages/docente/DetalleMateria'
+import Calificaciones from './pages/docente/Calificaciones'
+import HistorialAlumno from './pages/docente/HistorialAlumno'
+import DetalleCalificacionDocente from './pages/docente/DetalleCalificacionDocente'
+
+const GESTION = ['docente', 'admin'] // roles que gestionan materias y notas
 
 // Todas las rutas (vistas) de la aplicación
 export default function App() {
@@ -26,6 +33,13 @@ export default function App() {
           {/* Alumno */}
           <Route path="/mis-calificaciones" element={<RutaProtegida roles={['alumno']}><MisCalificaciones /></RutaProtegida>} />
           <Route path="/mis-calificaciones/:id" element={<RutaProtegida roles={['alumno']}><DetalleCalificacion /></RutaProtegida>} />
+
+          {/* Docente (y admin) */}
+          <Route path="/materias" element={<RutaProtegida roles={['docente']}><MisMaterias /></RutaProtegida>} />
+          <Route path="/materias/:id" element={<RutaProtegida roles={GESTION}><DetalleMateria /></RutaProtegida>} />
+          <Route path="/calificaciones" element={<RutaProtegida roles={GESTION}><Calificaciones /></RutaProtegida>} />
+          <Route path="/calificaciones/:id" element={<RutaProtegida roles={GESTION}><DetalleCalificacionDocente /></RutaProtegida>} />
+          <Route path="/alumnos/:id" element={<RutaProtegida roles={GESTION}><HistorialAlumno /></RutaProtegida>} />
 
           <Route path="*" element={<NoEncontrada />} />
         </Routes>

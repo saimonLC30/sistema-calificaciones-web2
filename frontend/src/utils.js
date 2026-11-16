@@ -19,3 +19,15 @@ const TIPOS = {
 export function nombreTipo(tipo) {
   return TIPOS[tipo] || tipo
 }
+
+// Opciones para los <select> de tipo de evaluación
+export const TIPOS_EVALUACION = Object.keys(TIPOS)
+
+// Para un <input type="date">: "2026-09-15T00:00:00.000Z" -> "2026-09-15"
+export function fechaParaInput(fecha) {
+  return fecha ? String(fecha).slice(0, 10) : ''
+}
+
+export function hoy() {
+  return new Date().toISOString().slice(0, 10)
+}

@@ -7,7 +7,10 @@ const ACCESOS = {
   alumno: [
     { titulo: 'Mis calificaciones', texto: 'Tus notas publicadas y el promedio de cada materia.', ruta: '/mis-calificaciones' },
   ],
-  docente: [],
+  docente: [
+    { titulo: 'Mis materias', texto: 'Tus materias: alumnos, evaluaciones y carga de notas.', ruta: '/materias' },
+    { titulo: 'Calificaciones', texto: 'Todas las notas de tus materias, con filtros. Publicá, corregí o anulá.', ruta: '/calificaciones' },
+  ],
   admin: [],
 }
 

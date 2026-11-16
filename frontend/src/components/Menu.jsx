@@ -24,6 +24,12 @@ export default function Menu() {
               {usuario.rol === 'alumno' && (
                 <Nav.Link as={Link} to="/mis-calificaciones">Mis calificaciones</Nav.Link>
               )}
+              {usuario.rol === 'docente' && (
+                <>
+                  <Nav.Link as={Link} to="/materias">Mis materias</Nav.Link>
+                  <Nav.Link as={Link} to="/calificaciones">Calificaciones</Nav.Link>
+                </>
+              )}
             </Nav>
           )}
 
