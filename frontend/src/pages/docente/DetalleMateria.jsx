@@ -9,11 +9,16 @@ import ModalConfirmar from '../../components/ModalConfirmar'
 import ModalEvaluacion from '../../components/docente/ModalEvaluacion'
 import ModalCalificacion from '../../components/docente/ModalCalificacion'
 import GestionCalificaciones from '../../components/docente/GestionCalificaciones'
+import ModalInscribir from '../../components/admin/ModalInscribir'
+import { useSesion } from '../../context/SesionContext'
 import { formatearFecha, nombreTipo } from '../../utils'
 
 // Gestión de una materia, en tres pestañas: calificaciones, evaluaciones y alumnos.
 // Usa tres GET: la materia, sus evaluaciones y sus calificaciones.
+// El admin además puede inscribir y desinscribir alumnos desde la pestaña "Alumnos".
 export default function DetalleMateria() {
+  const { usuario } = useSesion()
+  const esAdmin = usuario.rol === 'admin'
   const { id } = useParams()
   const navigate = useNavigate()
   const materia = useDatos(`/api/materias/${id}`)
@@ -28,6 +33,7 @@ export default function DetalleMateria() {
   function listo(texto) {
     setModal(null)
     setMensaje(texto)
+    materia.recargar()
     evaluaciones.recargar()
     calificaciones.recargar()
   }
@@ -101,6 +107,11 @@ export default function DetalleMateria() {
 
         {/* ── Alumnos ──────────────────────────────── */}
         <Tab eventKey="alumnos" title={`Alumnos (${alumnos.length})`}>
+          {esAdmin && (
+            <div className="d-flex justify-content-end mb-2">
+              <Button onClick={() => setModal({ tipo: 'inscribir' })}>+ Inscribir alumnos</Button>
+            </div>
+          )}
           <Table striped bordered hover responsive className="bg-white align-middle">
             <thead>
               <tr>
@@ -114,8 +125,11 @@ export default function DetalleMateria() {
                 <tr key={a._id}>
                   <td>{a.nombre}</td>
                   <td>{a.email}</td>
-                  <td>
-                    <Button as={Link} to={`/alumnos/${a._id}`} size="sm" variant="outline-secondary">Ver historial</Button>
+                  <td className="text-nowrap">
+                    <Button as={Link} to={`/alumnos/${a._id}`} size="sm" variant="outline-secondary" className="me-1">Ver historial</Button>
+                    {esAdmin && (
+                      <Button size="sm" variant="outline-danger" onClick={() => setModal({ tipo: 'desinscribir', alumno: a })}>Desinscribir</Button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -140,6 +154,24 @@ export default function DetalleMateria() {
           ruta={`/api/evaluaciones/${modal.evaluacion._id}`}
           method="DELETE"
           mensajeExito="Evaluación eliminada"
+          onListo={listo}
+          onCerrar={() => setModal(null)}
+        />
+      )}
+
+      {modal?.tipo === 'inscribir' && (
+        <ModalInscribir materiaId={id} inscriptos={alumnos} onListo={listo} onCerrar={() => setModal(null)} />
+      )}
+
+      {modal?.tipo === 'desinscribir' && (
+        <ModalConfirmar
+          titulo="Desinscribir alumno"
+          mensaje={<>¿Desinscribir a <b>{modal.alumno.nombre}</b> de {nombre}? Solo se puede si todavía no tiene notas en la materia.</>}
+          textoBoton="Desinscribir"
+          variante="danger"
+          ruta={`/api/materias/${id}/alumnos/${modal.alumno._id}`}
+          method="DELETE"
+          mensajeExito="Alumno desinscripto"
           onListo={listo}
           onCerrar={() => setModal(null)}
         />

@@ -13,6 +13,8 @@ import DetalleMateria from './pages/docente/DetalleMateria'
 import Calificaciones from './pages/docente/Calificaciones'
 import HistorialAlumno from './pages/docente/HistorialAlumno'
 import DetalleCalificacionDocente from './pages/docente/DetalleCalificacionDocente'
+import Usuarios from './pages/admin/Usuarios'
+import Materias from './pages/admin/Materias'
 
 const GESTION = ['docente', 'admin'] // roles que gestionan materias y notas
 
@@ -40,6 +42,10 @@ export default function App() {
           <Route path="/calificaciones" element={<RutaProtegida roles={GESTION}><Calificaciones /></RutaProtegida>} />
           <Route path="/calificaciones/:id" element={<RutaProtegida roles={GESTION}><DetalleCalificacionDocente /></RutaProtegida>} />
           <Route path="/alumnos/:id" element={<RutaProtegida roles={GESTION}><HistorialAlumno /></RutaProtegida>} />
+
+          {/* Admin */}
+          <Route path="/admin/usuarios" element={<RutaProtegida roles={['admin']}><Usuarios /></RutaProtegida>} />
+          <Route path="/admin/materias" element={<RutaProtegida roles={['admin']}><Materias /></RutaProtegida>} />
 
           <Route path="*" element={<NoEncontrada />} />
         </Routes>

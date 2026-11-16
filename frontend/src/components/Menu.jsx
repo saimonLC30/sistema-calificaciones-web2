@@ -30,6 +30,13 @@ export default function Menu() {
                   <Nav.Link as={Link} to="/calificaciones">Calificaciones</Nav.Link>
                 </>
               )}
+              {usuario.rol === 'admin' && (
+                <>
+                  <Nav.Link as={Link} to="/admin/usuarios">Usuarios</Nav.Link>
+                  <Nav.Link as={Link} to="/admin/materias">Materias</Nav.Link>
+                  <Nav.Link as={Link} to="/calificaciones">Calificaciones</Nav.Link>
+                </>
+              )}
             </Nav>
           )}
 

@@ -2,7 +2,7 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useSesion } from '../context/SesionContext'
 
-// Accesos de cada rol. Se van sumando a medida que se agregan pantallas.
+// Accesos rápidos de cada rol
 const ACCESOS = {
   alumno: [
     { titulo: 'Mis calificaciones', texto: 'Tus notas publicadas y el promedio de cada materia.', ruta: '/mis-calificaciones' },
@@ -11,7 +11,11 @@ const ACCESOS = {
     { titulo: 'Mis materias', texto: 'Tus materias: alumnos, evaluaciones y carga de notas.', ruta: '/materias' },
     { titulo: 'Calificaciones', texto: 'Todas las notas de tus materias, con filtros. Publicá, corregí o anulá.', ruta: '/calificaciones' },
   ],
-  admin: [],
+  admin: [
+    { titulo: 'Usuarios', texto: 'Alta de docentes y alumnos, y cambio de roles.', ruta: '/admin/usuarios' },
+    { titulo: 'Materias', texto: 'Crear materias, asignar docentes e inscribir alumnos.', ruta: '/admin/materias' },
+    { titulo: 'Calificaciones', texto: 'Todas las notas del sistema, con filtros.', ruta: '/calificaciones' },
+  ],
 }
 
 export default function Inicio() {
