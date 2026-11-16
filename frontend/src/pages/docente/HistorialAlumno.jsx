@@ -5,6 +5,7 @@ import Cargando from '../../components/Cargando'
 import MensajeError from '../../components/MensajeError'
 import TarjetasPromedio from '../../components/TarjetasPromedio'
 import TablaCalificaciones from '../../components/TablaCalificaciones'
+import { useTitulo } from '../../hooks/useTitulo'
 
 // Historial académico de un alumno: promedios y todas sus notas.
 // El docente solo ve las de sus materias (lo filtra el backend).
@@ -13,6 +14,7 @@ export default function HistorialAlumno() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { datos, error } = useDatos(`/api/calificaciones/alumno/${id}`)
+  useTitulo(datos?.alumno.nombre ?? 'Historial')
 
   return (
     <Container className="py-4">

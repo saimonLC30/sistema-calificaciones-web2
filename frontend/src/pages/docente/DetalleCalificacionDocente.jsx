@@ -5,6 +5,7 @@ import Cargando from '../../components/Cargando'
 import MensajeError from '../../components/MensajeError'
 import DatosCalificacion from '../../components/DatosCalificacion'
 import { formatearFecha } from '../../utils'
+import { useTitulo } from '../../hooks/useTitulo'
 
 // Qué significa cada acción del historial
 const ACCIONES = {
@@ -16,6 +17,7 @@ const ACCIONES = {
 // Detalle de una calificación + su historial de cambios (solo docente y admin).
 // GET /api/calificaciones/:id
 export default function DetalleCalificacionDocente() {
+  useTitulo('Detalle de nota')
   const { id } = useParams()
   const navigate = useNavigate()
   const { datos, error } = useDatos(`/api/calificaciones/${id}`)

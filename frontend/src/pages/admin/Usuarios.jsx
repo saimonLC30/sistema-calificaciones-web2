@@ -7,12 +7,14 @@ import MensajeError from '../../components/MensajeError'
 import MensajeExito from '../../components/MensajeExito'
 import ModalUsuario from '../../components/admin/ModalUsuario'
 import ModalRol from '../../components/admin/ModalRol'
+import { useTitulo } from '../../hooks/useTitulo'
 
 const COLORES_ROL = { admin: 'danger', docente: 'primary', alumno: 'success' }
 
 // Gestión de usuarios (solo admin): listar, buscar, crear y cambiar roles.
 // GET /api/usuarios?rol=...&q=...
 export default function Usuarios() {
+  useTitulo('Usuarios')
   const { usuario: yo } = useSesion()
   const [rol, setRol] = useState('')
   const [texto, setTexto] = useState('') // lo que se escribe en el buscador

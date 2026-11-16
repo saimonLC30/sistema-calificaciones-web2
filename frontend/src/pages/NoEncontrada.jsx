@@ -1,7 +1,9 @@
 import { Container, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useTitulo } from '../hooks/useTitulo'
 
 export default function NoEncontrada() {
+  useTitulo('Página no encontrada')
   return (
     <Container className="py-5 text-center">
       <h2>Página no encontrada</h2>

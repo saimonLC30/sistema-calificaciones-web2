@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
+import { useSearchParams } from 'react-router-dom'
 import { useDatos } from '../../hooks/useDatos'
 import Cargando from '../../components/Cargando'
 import MensajeError from '../../components/MensajeError'
 import MensajeExito from '../../components/MensajeExito'
 import GestionCalificaciones from '../../components/docente/GestionCalificaciones'
 import { TIPOS_EVALUACION, nombreTipo } from '../../utils'
+import { useTitulo } from '../../hooks/useTitulo'
 
 const ESTADOS = ['pendiente', 'publicada', 'revisada', 'anulada']
 
@@ -13,7 +15,14 @@ const ESTADOS = ['pendiente', 'publicada', 'revisada', 'anulada']
 // Docente: las de sus materias. Admin: todas. (Lo decide el backend.)
 // Los filtros se mandan como parámetros: GET /api/calificaciones?materia=...&estado=...&tipo=...
 export default function Calificaciones() {
-  const [filtros, setFiltros] = useState({ materia: '', estado: '', tipo: '' })
+  useTitulo('Calificaciones')
+  // Los filtros pueden venir en la URL (ej: desde el inicio, /calificaciones?estado=pendiente)
+  const [parametrosUrl] = useSearchParams()
+  const [filtros, setFiltros] = useState({
+    materia: parametrosUrl.get('materia') ?? '',
+    estado: parametrosUrl.get('estado') ?? '',
+    tipo: parametrosUrl.get('tipo') ?? '',
+  })
   const [mensaje, setMensaje] = useState('')
 
   // Arma "?materia=...&estado=..." solo con los filtros elegidos

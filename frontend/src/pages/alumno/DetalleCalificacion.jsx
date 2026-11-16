@@ -4,10 +4,12 @@ import { useDatos } from '../../hooks/useDatos'
 import Cargando from '../../components/Cargando'
 import MensajeError from '../../components/MensajeError'
 import DatosCalificacion from '../../components/DatosCalificacion'
+import { useTitulo } from '../../hooks/useTitulo'
 
 // Detalle de una calificación del alumno. El id viene de la URL: /mis-calificaciones/:id
 // GET /api/calificaciones/:id  (el backend no le manda el historial interno al alumno)
 export default function DetalleCalificacion() {
+  useTitulo('Detalle de nota')
   const { id } = useParams()
   const { datos, error } = useDatos(`/api/calificaciones/${id}`)
 

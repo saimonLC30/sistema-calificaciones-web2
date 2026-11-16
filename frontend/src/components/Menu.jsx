@@ -1,6 +1,7 @@
 import { Navbar, Container, Nav, Button, Badge } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSesion } from '../context/SesionContext'
+import Logo from './Logo'
 
 // Barra de navegación: muestra opciones distintas según el rol
 export default function Menu() {
@@ -15,7 +16,7 @@ export default function Menu() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/">Calificaciones</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/"><Logo /> Calificaciones</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
           {usuario && (

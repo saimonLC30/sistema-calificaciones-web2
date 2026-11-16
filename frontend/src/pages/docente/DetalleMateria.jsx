@@ -12,6 +12,7 @@ import GestionCalificaciones from '../../components/docente/GestionCalificacione
 import ModalInscribir from '../../components/admin/ModalInscribir'
 import { useSesion } from '../../context/SesionContext'
 import { formatearFecha, nombreTipo } from '../../utils'
+import { useTitulo } from '../../hooks/useTitulo'
 
 // Gestión de una materia, en tres pestañas: calificaciones, evaluaciones y alumnos.
 // Usa tres GET: la materia, sus evaluaciones y sus calificaciones.
@@ -24,6 +25,7 @@ export default function DetalleMateria() {
   const materia = useDatos(`/api/materias/${id}`)
   const evaluaciones = useDatos(`/api/evaluaciones?materia=${id}`)
   const calificaciones = useDatos(`/api/calificaciones?materia=${id}&limite=100`)
+  useTitulo(materia.datos?.materia.nombre ?? 'Materia')
 
   const [mensaje, setMensaje] = useState('')
   // Qué ventana está abierta: { tipo: 'nueva-evaluacion' | 'editar-evaluacion' | 'eliminar-evaluacion' | 'nueva-nota', evaluacion? }

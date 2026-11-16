@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import { useDatos } from '../../hooks/useDatos'
 import Cargando from '../../components/Cargando'
 import MensajeError from '../../components/MensajeError'
+import { useTitulo } from '../../hooks/useTitulo'
 
 // Las materias que dicta el docente (GET /api/materias).
 // El backend ya filtra: el docente solo recibe las suyas.
 export default function MisMaterias() {
+  useTitulo('Mis materias')
   const { datos, error } = useDatos('/api/materias')
 
   return (

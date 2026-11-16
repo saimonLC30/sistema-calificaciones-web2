@@ -1,7 +1,17 @@
 /* Estilos generales. Casi todo el diseño viene de React Bootstrap. */
 body {
   background-color: #f5f6f8;
+}
+
+/* La app ocupa toda la altura, así el pie de página queda abajo */
+.app {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app main {
+  flex-grow: 1;
 }
 
 .pantalla-login {
@@ -9,7 +19,15 @@ body {
   margin: 4rem auto;
 }
 
-.tarjeta-promedio .promedio {
+.tarjeta-promedio .promedio,
+.dato-valor {
   font-size: 2rem;
   font-weight: 600;
+  line-height: 1.2;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

@@ -6,10 +6,12 @@ import Cargando from '../../components/Cargando'
 import MensajeError from '../../components/MensajeError'
 import TarjetasPromedio from '../../components/TarjetasPromedio'
 import TablaCalificaciones from '../../components/TablaCalificaciones'
+import { useTitulo } from '../../hooks/useTitulo'
 
 // El alumno ve sus notas publicadas o revisadas y el promedio de cada materia.
 // GET /api/calificaciones/mis-calificaciones
 export default function MisCalificaciones() {
+  useTitulo('Mis calificaciones')
   const { datos, error } = useDatos('/api/calificaciones/mis-calificaciones')
   const [materia, setMateria] = useState('todas')
 

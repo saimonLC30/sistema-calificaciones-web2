@@ -3,6 +3,7 @@ import { Card, Form, Button, Spinner } from 'react-bootstrap'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useSesion } from '../context/SesionContext'
 import MensajeError from '../components/MensajeError'
+import { useTitulo } from '../hooks/useTitulo'
 
 // Usuarios que crea el seed del backend (npm run seed), para probar rápido
 const USUARIOS_DE_PRUEBA = [
@@ -12,6 +13,7 @@ const USUARIOS_DE_PRUEBA = [
 ]
 
 export default function Login() {
+  useTitulo('Ingresar')
   const { usuario, iniciarSesion } = useSesion()
   const navigate = useNavigate()
 

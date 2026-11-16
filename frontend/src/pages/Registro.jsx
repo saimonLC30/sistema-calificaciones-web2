@@ -3,9 +3,11 @@ import { Card, Form, Button, Spinner } from 'react-bootstrap'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { useSesion } from '../context/SesionContext'
 import MensajeError from '../components/MensajeError'
+import { useTitulo } from '../hooks/useTitulo'
 
 // Registro público: el backend siempre crea la cuenta como alumno
 export default function Registro() {
+  useTitulo('Crear cuenta')
   const { usuario, registrarse } = useSesion()
   const navigate = useNavigate()
 

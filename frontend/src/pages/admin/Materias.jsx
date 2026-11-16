@@ -7,10 +7,12 @@ import MensajeError from '../../components/MensajeError'
 import MensajeExito from '../../components/MensajeExito'
 import ModalConfirmar from '../../components/ModalConfirmar'
 import ModalMateria from '../../components/admin/ModalMateria'
+import { useTitulo } from '../../hooks/useTitulo'
 
 // Gestión de materias (solo admin): crear, editar, eliminar.
 // Para inscribir alumnos o cargar notas se entra a "Gestionar" (la misma pantalla que usa el docente).
 export default function Materias() {
+  useTitulo('Materias')
   const { datos, error, recargar } = useDatos('/api/materias')
   const [mensaje, setMensaje] = useState('')
   const [modal, setModal] = useState(null) // { tipo: 'nueva' | 'editar' | 'eliminar', materia? }
